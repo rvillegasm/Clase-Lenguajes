@@ -1,7 +1,7 @@
 
-all: calc
+all: storecalc
 
-calc: calcparser.o calclexer.o
+storecalc: calcparser.o calclexer.o
 	gcc -o $@ calcparser.o calclexer.o -lm
 
 calcparser.o: calcparser.c
@@ -18,4 +18,4 @@ calclexer.c: calc.lex
 
 clean:
 	rm -f calcparser.c calclexer.c calcparser.o calclexer.o calcparser.h \
-	calc
+	storecalc
