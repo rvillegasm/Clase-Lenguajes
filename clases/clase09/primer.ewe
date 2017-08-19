@@ -1,0 +1,18 @@
+inicio: cero	:= 0
+	cinco	:= 5
+	uno	:= 1
+	dos	:= 2
+	a	:=cero
+	b	:= cinco
+	c	:= b + uno
+	a	:= b * c
+	a	:= a * dos
+	writeInt(a)
+Final:	halt
+equ a M[0]
+equ b M[1]
+equ c M[2]
+equ cero M[3]
+equ cinco M[4]
+equ uno M[5]
+equ dos M[6]
