@@ -4,7 +4,7 @@
  { S -> ABC,
    A -> aA | a,
    b -> bB | b,
-   c -> cC| c | ,
+   c -> cC | c | ,
  }
  S
 }
