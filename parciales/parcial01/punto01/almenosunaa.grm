@@ -1,9 +1,9 @@
 {
  { G, A, B }
  { a, b }
- { G -> AB | ,
+ { G -> AB,
    A -> aA | a,
-   B -> bB | b
+   B -> bB | b,
  },
  G
 }
