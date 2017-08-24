@@ -3,8 +3,8 @@
  { a, b, c },
  { S -> ABC,
    A -> aA | a,
-   b -> bB | b,
-   c -> cC | c | ,
+   B -> bB | b,
+   C -> cC | c | ,
  }
  S
 }
