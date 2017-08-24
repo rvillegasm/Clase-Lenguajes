@@ -1,0 +1,10 @@
+{
+ { S, A, B, C },
+ { a, b, c },
+ { S -> ABC,
+   A -> aA | a,
+   b -> bB | b,
+   c -> cC| c | ,
+ }
+ S
+}
