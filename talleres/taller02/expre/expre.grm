@@ -1,0 +1,15 @@
+{
+ { E, T, F }
+ { i, w, s, r, m, d, a, b }
+ { E -> EsT |,
+     	ErT |,
+	T
+   T -> TmF |,
+     	TdF |,
+	F
+   F -> i |,
+     	w |,
+	aEb
+ },
+ E
+}
