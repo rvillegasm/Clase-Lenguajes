@@ -1,5 +1,4 @@
-#ifndef parser_h
-#define parser_h
+#pragma once
 
 #include "ast.h"
 #include "scanner.h"
@@ -22,6 +21,3 @@ class Parser {
 
    Scanner* scan;
 };
-
-
-#endif   

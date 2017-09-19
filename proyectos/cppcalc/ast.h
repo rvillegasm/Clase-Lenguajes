@@ -1,5 +1,4 @@
-#ifndef ast_h
-#define ast_h
+#pragma once
 
 // using namespace std;
 
@@ -57,9 +56,4 @@ class NumNode : public AST {
  private:
    int val;
 };
-
-
-
-
-#endif
 
