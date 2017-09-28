@@ -1,0 +1,58 @@
+inicio: readInt(a)
+        readInt(b)
+	readInt(c)
+	readInt(d)
+	cero = 0
+	uno = 1
+	dos = 2
+	parA = a%dos
+	parB = b%dos
+	parC = c%dos
+	parD = d%dos
+	controlImpar = uno
+	controlMod = controlImpar%dos
+
+no1:    if parA == cero then goto si1 
+        writeInt(uno)
+	controlImpar+1
+	goto no2
+si1:    writeInt(cero)
+
+no2:    if parB == cero then goto si2
+        writeInt(uno)
+	controlImpar+1
+	goto no3
+si2:    writeInt(cero)
+
+no3:    if parC == cero then goto si3
+	writeInt(uno)
+	controlImpar+1
+	goto no4
+si3:    writeInt(cero)
+
+no4:    if parD == cero then goto si4
+	writeInt(uno)
+	controlImpar+1
+	goto control
+si4:    writeInt(cero)
+
+control: if controlMod == cero then goto siC
+	 writeInt(cero)
+	 goto fin
+siC:     writeInt(uno)
+
+fin:    halt
+
+equ a M[0]
+equ b M[1]
+equ c M[2]
+equ d M[3]
+equ cero M[4]
+equ uno M[5]
+equ dos M[6]
+equ parA M[7]
+equ parB M[8]
+equ parC M[9]
+equ parD M[10]
+equ controlImpar M[11]
+equ controlMod M[12]
