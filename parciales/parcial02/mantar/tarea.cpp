@@ -27,6 +27,12 @@ Tarea::pulso(){
   if(estado==INACTIVO){
     tiempoInactivo += 1;
   }
+  else if(estado==ACTIVO){
+    tiempoActivo += 1;
+  }
+  else if(estado==TERMINADA){
+    tiempoTerminada += 1;
+  }
   
 }
 
