@@ -35,6 +35,7 @@ main(void) {
          << endl;
 
     fOmision->modFactor(fOmision->multFactor(valor));
+    delete interno;
   }
 
   return EXIT_SUCCESS;

@@ -15,7 +15,6 @@
  */
 #include <iostream>
 #include <cstdlib>
-#include "funciones03.h"
 
 using namespace std;
 
