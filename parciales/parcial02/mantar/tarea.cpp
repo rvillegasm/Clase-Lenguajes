@@ -1,49 +1,52 @@
 #include "estado.h"
-#inlcude "prioridad.h"
+#include "prioridad.h"
 #include "tarea.h"
 
-Tarea::Tarea(Prioridad prioridad,Estado estado){
+Tarea::Tarea(Prioridad prioridad){
   this -> prioridad = prioridad;
-  this -> estado = estado;
+  this -> estado = ACTIVO;
+  this -> tiempoActivo = 0;
+  this -> tiempoInactivo = 0;
+  this -> tiempoTerminada = 0;
 }
 
-Tarea::obtPrioridad(){
-  return prioridad;
+Prioridad Tarea::obtPrioridad() const{
+  return this -> prioridad;
 }
 
-Tarea::obtTiempoActiva(){
-  return tiempoActivo;
+int Tarea::obtTiempoActivo() const{
+  return this -> tiempoActivo;
 }
 
-Tarea::obtTiempoInactiva(){
-  return tiempoInactivo;
+int Tarea::obtTiempoInactivo() const{
+  return this -> tiempoInactivo;
 }
 
-Tarea::obtTiempoTerminada(){
-  return tiempoTerminada;
+int Tarea::obtTiempoTerminado() const{
+  return this -> tiempoTerminada;
 }
 
-Tarea::pulso(){
+void Tarea::pulso(){
   if(estado==INACTIVO){
-    tiempoInactivo += 1;
+    this -> tiempoInactivo += 1;
   }
   else if(estado==ACTIVO){
-    tiempoActivo += 1;
+    this -> tiempoActivo += 1;
   }
-  else if(estado==TERMINADA){
-    tiempoTerminada += 1;
+  else if(estado==TERMINADO){
+    this -> tiempoTerminada += 1;
   }
   
 }
 
-Tarea::suspender(){
+void Tarea::suspender(){
   this -> estado = INACTIVO;
 }
 
-Tarea::terminar(){
+void Tarea::terminar(){
   this -> estado = TERMINADO;
 }
 
-tarea::reasumir(){
+void Tarea::reasumir(){
   this -> estado = ACTIVO;
 }

@@ -1,6 +1,6 @@
 #pragma once
-#include "estado.h"
 #include "prioridad.h"
+#include "estado.h"
 
 class Tarea{
   int tiempoActivo;
@@ -10,12 +10,12 @@ class Tarea{
   Prioridad prioridad;
 
  public:
-  Tarea(Prioridad prioridad, Estado estado);
+  Tarea(Prioridad prioridad);
   Prioridad obtPrioridad() const;
   void pulso();
-  int obtTiempoActiva() const;
-  int obtTiempoInactiva() const;
-  int obtTiempoTerminada() const;
+  int obtTiempoActivo() const;
+  int obtTiempoInactivo() const;
+  int obtTiempoTerminado() const;
   void suspender();
   void terminar();
   void reasumir();
