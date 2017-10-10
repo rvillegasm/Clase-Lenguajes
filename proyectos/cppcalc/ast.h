@@ -61,6 +61,12 @@ class DivideNode : public BinaryNode {
   int evaluate();
 };
 
+class StoreNode : public UnaryNode {
+ public:
+  StoreNode(AST* sub);
+  int evaluate();
+};
+
 class NumNode : public AST {
  public:
    NumNode(int n);
@@ -71,3 +77,8 @@ class NumNode : public AST {
    int val;
 };
 
+class RecallNode : public AST {
+ public:
+  RecallNode();
+  int evaluate();
+};

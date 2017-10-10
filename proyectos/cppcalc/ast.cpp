@@ -88,6 +88,15 @@ int DivideNode::evaluate() {
    return getLeftSubTree()->evaluate() / getRightSubTree()->evaluate();
 }
 
+StoreNode::StoreNode(AST* sub):
+   UnaryNode(sub)
+{}
+
+int StoreNode::evaluate() {
+   calc->store(getSubTree()->evaluate());
+   return calc->recall();
+}
+
 NumNode::NumNode(int n) :
    AST(),
    val(n)
@@ -95,4 +104,12 @@ NumNode::NumNode(int n) :
 
 int NumNode::evaluate() {
    return val;
+}
+
+RecallNode::RecallNode():
+   AST()
+{}
+
+int RecallNode::evaluate() {
+   return calc -> recall();
 }
