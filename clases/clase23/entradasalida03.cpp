@@ -16,8 +16,10 @@ main(void) {
 
   int i;
   float j;
-
-  cin >> i >> j;
+  cin >> i;
+  if(!cin) cerr << "**Hay un error en la entrada**" << endl;
+  cin >> j;
+  if(!cin) cerr << "**Hay un error en la entrada**" << endl;
 
   i += 2; // i = i + 2;
   j += 2.02f;

@@ -8,6 +8,7 @@
  */
 #include <iostream>
 #include <cstdlib>
+#include <ios>
 #include <iomanip>
 
 using namespace std;
@@ -27,6 +28,10 @@ main(void) {
 	 << left << setw(10) << j << endl;
 
   }
-  
+
+  if(cin.eof()) {
+    cerr << "Los datos se leyeron completamente" << endl;
+  }
+
   return EXIT_SUCCESS;
 }
