@@ -2,29 +2,20 @@
 #include "calcex.h"
 #include <iostream>
 #include <string>
+#include <cctype>
+
+//replace isLeeter with is alpha && isDigit with isdigit && isWhiteSpace with isspace
 
 using namespace std;
 
 //Uncomment this to get debug information
-//#define debug
+#define debug
 
 const int numberOfKeywords = 2;
 
 const string keywd[numberOfKeywords] = {
   string("S"), string("R")
 };
-
-int isLetter(char c) {
-   return ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'));
-}
-
-int isDigit(char c) {
-  return (c >= '0' && c <= '9');
-}
-
-int isWhiteSpace(char c) {
-  return (c == ' ' || c == '\t' || c == '\n');
-}
 
 Scanner::Scanner(istream* in):
   inStream(in),
@@ -53,7 +44,7 @@ Token* Scanner::getToken() {
    Token* t;
    int state=0;
    bool foundOne=false;
-   char c;
+   int c;
    string lex;
    TokenType type;
    int k;
@@ -68,8 +59,8 @@ Token* Scanner::getToken() {
             lex = "";
             column=colCount;
             line = lineCount;
-            if (isLetter(c)) state=1;
-            else if (isDigit(c)) state=2;
+            if (isalpha(c)) state=1;
+            else if (isdigit(c)) state=2;
             else if (c=='+') state=3;
             else if (c=='-') state=4;
             else if (c=='*') state=5;
@@ -80,7 +71,7 @@ Token* Scanner::getToken() {
                colCount=-1;
                lineCount++;
             }
-            else if (isWhiteSpace(c));
+            else if (isspace(c));
             else if (inStream->eof()) {
                foundOne=true;
                type=eof;
@@ -92,7 +83,7 @@ Token* Scanner::getToken() {
             }
             break;
          case 1 :
-            if (isLetter(c) || isDigit(c)) state=1;
+            if (isalnum(c)) state=1;
             else {
                for (k=0;k<numberOfKeywords;k++)
                   if (lex == keywd[k]) {
@@ -106,7 +97,7 @@ Token* Scanner::getToken() {
             }
             break;
          case 2 :
-            if (isDigit(c)) state=2;
+            if (isdigit(c)) state=2;
             else {
                type = number;
                foundOne=true;
@@ -139,7 +130,7 @@ Token* Scanner::getToken() {
       }
       
       if (!foundOne) {
-         lex = lex + c;
+	lex = lex + (char) c;
          c = inStream->get();
       }
    }
