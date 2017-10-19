@@ -1,7 +1,7 @@
-CPPFLAGS=-g
+CPPFLAGS=-Ddebug -g
 
 cppcalc: calc.o scanner.o token.o ast.o parser.o calculator.o
-	g++ -g -o $@ $^
+	g++ -o $@ $^
 
 calc.o: calc.cpp scanner.h token.h
 

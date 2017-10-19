@@ -3,13 +3,14 @@
 #include <iostream>
 #include <string>
 #include <cctype>
+#include <cstdio>
 
 //replace isLeeter with is alpha && isDigit with isdigit && isWhiteSpace with isspace
 
 using namespace std;
 
 //Uncomment this to get debug information
-#define debug
+//#define debug
 
 const int numberOfKeywords = 2;
 
@@ -72,7 +73,7 @@ Token* Scanner::getToken() {
                lineCount++;
             }
             else if (isspace(c));
-            else if (inStream->eof()) {
+            else if (inStream->eof() || c == EOF) {
                foundOne=true;
                type=eof;
             }
