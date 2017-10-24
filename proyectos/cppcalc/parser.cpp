@@ -49,37 +49,79 @@ AST* Parser::restExpr(AST* e) {
 }
 
 AST* Parser::term() {
-   //write your term() code here. This code is just temporary
-   //so you can try the calculator out before finishing it.
-   Token* t = scan->getToken();
-
-   if (t->getType() == number) {
-      istringstream in(t->getLex());
-      int val;
-      in >> val;
-      return new NumNode(val);
-   }
-
-   cout << "Term not implemented" << endl;
-
-   throw ParseError; 
+   return restTerm(storable());
 }
 
 AST* Parser::restTerm(AST* e) {
-   cout << "restTerm not implemented" << endl;
+  Token* t = scan->getToken();
 
-   throw ParseError; 
+  if (t->getType() == times) {
+    return restTerm(new TimesNode(e, storable()));
+  }
+
+  if (t->getType() == divide) {
+    return restTerm(new DivideNode(e, storable()));
+  }
+
+  scan->putBackToken();
+
+  return e;
 }
 
 AST* Parser::storable() {
-   cout << "storable not implemented" << endl;
+  AST* result = factor();
 
-   throw ParseError; 
+  Token *t = scan->getToken();
+
+  if (t->getType() == keyword) {
+    if (t->getLex() == "S") {
+      return new StoreNode(result);
+    }
+    else {
+      cout << "Parser error: Expected s found "
+	   << t->getLex() << endl;
+      throw ParseError;
+    }
+  }
+
+  scan->putBackToken();
+
+  return result;
 }
 
 AST* Parser::factor() {
-   cout << "factor not implemented" << endl;
 
-   throw ParseError; 
-}
+  Token* t = scan->getToken();
+  
+   if (t->getType() == number) {
+     istringstream in(t->getLex());
+     int val;
+     in >> val;
+     return new NumNode(val);
+   }
+
+   if (t->getType() == keyword) {
+     if (t->getLex() == "R") {
+       return new RecallNode();
+     }
+     else {
+       cout << "Parse error: Expected R found "
+	    << t->getLex() << endl;
+       throw ParseError;
+     }
+   }
+
+   if (t->getType() == lparen) {
+     AST* result = expr();
+     t = scan->getToken();
+     if (t->getType() != rparen) {
+       cout << "Parse error: Expected ) found "
+	    << endl;
+       throw ParseError;
+     }
+     return result;
+   }
+
+   cout << "Expected Number, 'R', '('" << endl;
+   throw ParseError;}
    
