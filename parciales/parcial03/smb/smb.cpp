@@ -10,7 +10,7 @@ int main(void) {
   int i, j, local, visitante;
   
   while(cin >> i >> j) {
-    cin >> local >> visitante;
+    cin >> visitante >> local;
     i += visitante;
     j += local;
   }
