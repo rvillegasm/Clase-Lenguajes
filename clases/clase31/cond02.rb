@@ -3,10 +3,12 @@
 #
 # proposito: mostrar otros tipos de condiciones
 #
-s = gets.chomp
-v = s.to_i
 
-unless v == 10 then
-  puts "v: #{v} es diferente de 10"
+def cond02 v 
+  unless v == 10
+    return "v: #{v} es diferente de 10"
+  else
+    return "v: #{v} es 10"
+  end
 end
 

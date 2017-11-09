@@ -1,9 +1,8 @@
 #!/usr/bin/ruby
 
-s = gets.chomp
-v = s.to_i
+v = gets.chomp.to_i
 
-if v != 10 then
+if v != 10
   puts "v: #{v} es diferente de 10"
 end
 
