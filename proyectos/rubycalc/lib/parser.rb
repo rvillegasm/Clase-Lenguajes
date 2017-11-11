@@ -4,78 +4,104 @@ require 'token'
 require 'calcex'
 
 class Parser
-  def initialize(istream)
-    @scan = Scanner.new(istream)
+  def initialize istream
+    @scan = Scanner.new istream
   end
-   
-  def parse()
-    return Prog()
+
+  def parse
+    return prog
   end
-  
-  private
-  def Prog()
-    result = Expr()
-    t = @scan.getToken()
-    
-    if t.type != :eof then
+
+  def prog
+    result = expr
+    t = @scan.getToken
+
+    unless t.type == :eof then
       print "Expected EOF. Found ", t.type, ".\n"
       raise ParseError.new
     end
-    
+
     return result
   end
-  
-  def Expr() 
-    return RestExpr(Term())
+
+  def expr
+    restExpr term
   end
-   
-  def RestExpr(e) 
-    t = @scan.getToken()
-    
-    if t.type == :add then
-         return RestExpr(AddNode.new(e,Term()))
+
+  def restExpr e
+    t = @scan.getToken
+
+    case t.type
+    when :add
+      return restExpr(AddNode.new(e,term))
+    when :sub
+      return restExpr(SubNode.new(e,term))
+    else
+      @scan.putBackToken
     end
-    
-    if t.type == :sub then
-      return RestExpr(SubNode.new(e,Term()))
-    end
-      
-    @scan.putBackToken()
     
     return e
   end
   
-  def Term()
-    # Write your Term() code here. This code is just temporary
-    # so you can try the calculator out before finishing it.
-    
-    t = @scan.getToken()
-    
-    if t.type == :number then
-      val = t.lex.to_i
-      return NumNode.new(val)
+  def term
+    restTerm storable
+  end
+
+  def restTerm e
+    t = @scan.getToken
+
+    case t.type
+    when :times
+      return restTerm(TimesNode.new(e,storable))
+    when :divide
+      return restTerm(DivideNode.new(e,storable))
+    else
+      @scan.putBackToken
     end
     
-    puts "Term not implemented\n"
-    
-    raise ParseError.new
+    return e
   end
-   
-  def RestTerm(e)
+
+  def storable
+    result = factor
+    t = @scan.getToken
+    case t.type
+    when :keyword
+      unless t.lex == "S"
+        print "Expected S found", t.lex
+        raise ParseError.new
+      end
+    else
+      @scan.putBackToken
+    end
     
-    puts "RestTerm not implemented"
-    raise ParseError.new # "Parse Error"
+    return result
   end
-   
-  def Storable()
-   
-    puts "Storable not implemented"
-    raise ParseError.new # "Parse Error"
+
+  def factor
+    t = @scan.getToken
+    case t.type
+    when :number
+      return NumNode.new(t.lex.to_i)
+    when :keyword
+      unless t.lex == "R"
+        print "Expected R found", t.lex
+        raise ParseError.new
+      end
+      return RecallNode.new
+    when :lparen
+      result = expr
+      t = @scan.getToken
+      unless t.type == :rparen
+        print "Expected )"
+        raise ParseError.new
+      end
+      return result
+    else
+      print "Epected number, r, ("
+      raise ParseError.new
+    end
   end
-   
-  def Factor() 
-    
-    puts "Factor not implemented"
-    raise ParserError.new # "Parse Error"
-  end         
+  
+  private :prog, :expr, :restExpr, :term, :restTerm, :storable, :factor
 end

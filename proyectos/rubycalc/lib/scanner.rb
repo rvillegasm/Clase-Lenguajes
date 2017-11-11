@@ -16,21 +16,21 @@ class Scanner
   end
 
   def getToken()
-    if !@needToken
+    unless @needToken
       @needToken = true
       return @lastToken
     end
     
     state = 0
     foundOne = false
-    c = @istream.getc()
+    c = @istream.getc
     
-    if @istream.eof() then
+    if @istream.eof
       @lastToken = Token.new(:eof,@lineCount,@colCount)
       return @lastToken
     end
     
-    while !foundOne
+    until foundOne
       @colCount = @colCount + 1
       case state
       when 0
@@ -112,16 +112,21 @@ class Scanner
     return t 
   end
 
-  private
-  def isLetter(c) 
-    return ((?a <= c and c <= ?z) or (?A <= c and c <= ?Z))
+  # private
+  
+  
+  def isLetter c
+    # return ((?a <= c and c <= ?z) or (?A <= c and c <= ?Z))
+    /[A-Za-z]/ =~ c
   end
   
-  def isDigit(c)
-    return (?0 <= c and c <= ?9)
+  def isDigit c
+    /[0-9]/ =~ c
   end
   
-  def isWhiteSpace(c)
-    return (c == ?\  or c == ?\n or c == ?\t)
+  def isWhiteSpace c 
+    # return (c == ?\  or c == ?\n or c == ?\t)
+    /[ \n\t\v\f]/ =~ c
   end
+  private :isLetter, :isDigit, :isWhiteSpace
 end
