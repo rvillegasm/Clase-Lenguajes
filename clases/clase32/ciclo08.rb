@@ -6,7 +6,7 @@ num = 4
 
 # times ciclo
 puts "times do end"
-4.times do |i|
+num.times do |i|
   puts "i: #{i}"
 end
 
